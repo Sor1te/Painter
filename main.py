@@ -7,11 +7,12 @@ from random import randint
 
 from UI import Ui_MainWindow
 
-class Painter(QMainWindow, Ui_MainWindow):
+
+class Widget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        # Обратите внимание: имя элемента такое же как в QTDesigner
-        self.pushButton.move.connect(self.run)
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.run)
 
     def run(self):
         self.update()
@@ -39,6 +40,6 @@ class Painter(QMainWindow, Ui_MainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Painter()
+    ex = Widget()
     ex.show()
     sys.exit(app.exec())
