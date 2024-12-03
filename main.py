@@ -1,70 +1,17 @@
-import io
 import sys
 
-from PyQt6 import uic  # Импортируем uic
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtGui import QPainter, QColor, QPolygonF, QPolygon
 from PyQt6.QtCore import QPointF, QRectF, Qt
 from random import randint
 
-template = '''<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>800</width>
-    <height>600</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
-  </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>450</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Нарисовать</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>26</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
- </widget>
- <resources/>
- <connections/>
-</ui>
-'''
+from UI import Ui_MainWindow
 
-
-class Painter(QMainWindow):
+class Painter(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        f = io.StringIO(template)
-        uic.loadUi(f, self)  # Загружаем дизайн
         # Обратите внимание: имя элемента такое же как в QTDesigner
-        self.initUI()
-
-    def initUI(self):
-        self.pushButton.clicked.connect(self.run)
+        self.pushButton.move.connect(self.run)
 
     def run(self):
         self.update()
